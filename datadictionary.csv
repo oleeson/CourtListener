@@ -1,0 +1,320 @@
+,table,field_name,help_text
+0,dockets,source,contains the source of the Docket.
+1,dockets,appeal_from_str,"In appellate cases, this is the lower court or administrative body where this case was originally heard. This field is frequently blank due to it not being populated historically. This field may have values when the appeal_from field does not. That can happen if we are unable to normalize the value in this field."
+2,dockets,assigned_to_str,"The judge that the case was assigned to, as a string."
+3,dockets,referred_to_str,"The judge that the case was referred to, as a string."
+4,dockets,panel_str,"The initials of the judges on the panel that heard this case. This field is similar to the 'judges' field on the cluster, but contains initials instead of full judge names, and applies to the case on the whole instead of only to a specific decision."
+5,dockets,date_created,The time when this item was created
+6,dockets,date_modified,The last moment when the item was modified. A value in year 1750 indicates the value is unknown
+7,dockets,date_last_index,The last moment that the item was indexed in Solr.
+8,dockets,date_cert_granted,"date cert was granted for this case, if applicable"
+9,dockets,date_cert_denied,"the date cert was denied for this case, if applicable"
+10,dockets,date_argued,the date the case was argued
+11,dockets,date_reargued,the date the case was reargued
+12,dockets,date_reargument_denied,the date the reargument was denied
+13,dockets,date_filed,The date the case was filed.
+14,dockets,date_terminated,The date the case was terminated.
+15,dockets,date_last_filing,"The date the case was last updated in the docket, as shown in PACER's Docket History report."
+16,dockets,case_name_short,"The abridged name of the case, often a single word, e.g. 'Marsh'"
+17,dockets,case_name,The standard name of the case
+18,dockets,case_name_full,The full name of the case
+19,dockets,slug,URL that the document should map to (the slug)
+20,dockets,docket_number,"The docket numbers of a case, can be consolidated and quite long"
+21,dockets,docket_number_core,"For federal district court dockets, this is the most distilled docket number available. In this field, the docket number is stripped down to only the year and serial digits, eliminating the office at the beginning, letters in the middle, and the judge at the end. Thus, a docket number like 2:07-cv-34911-MJL becomes simply 0734911. This is the format that is provided by the IDB and is useful for de-duplication types of activities which otherwise get messy. We use a char field here to preserve leading zeros."
+22,dockets,pacer_case_id,The cased ID provided by PACER.
+23,dockets,cause,The cause for the case.
+24,dockets,nature_of_suit,The nature of suit code from PACER.
+25,dockets,jury_demand,The compensation demand.
+26,dockets,jurisdiction_type,"Stands for jurisdiction in RECAP XML docket. For example, 'Diversity', 'U.S. Government Defendant'."
+27,dockets,appellate_fee_status,The status of the fee in the appellate court. Can be used as a hint as to whether the government is the appellant (in which case the fee is waived).
+28,dockets,appellate_case_type_information,"Information about a case from the appellate docket in PACER. For example, 'civil, private, bankruptcy'."
+29,dockets,mdl_status,The MDL status of a case before the Judicial Panel for Multidistrict Litigation
+30,dockets,filepath_local,Path to RECAP's Docket XML page.
+31,dockets,filepath_ia,Path to the Docket XML page in The Internet Archive
+32,dockets,filepath_ia_json,Path to the docket JSON page in the Internet Archive
+33,dockets,ia_upload_failure_count,Number of times the upload to the Internet Archive failed.
+34,dockets,ia_needs_upload,"Does this item need to be uploaded to the Internet Archive? I.e., has it changed? This field is important because it keeps track of the status of all the related objects to the docket. For example, if a related docket entry changes, we need to upload the item to IA, but we can't easily check that."
+35,dockets,ia_date_first_change,The moment when this item first changed and was marked as needing an upload. Used for determining when to upload an item.
+36,dockets,date_blocked,The date that this opinion was blocked from indexing by search engines
+37,dockets,blocked,Whether a document should be blocked from indexing by search engines
+38,dockets,appeal_from,"In appellate cases, this is the lower court or administrative body where this case was originally heard. This field is frequently blank due to it not being populated historically or due to our inability to normalize the value in appeal_from_str."
+39,dockets,tags,The tags associated with the docket.
+40,dockets,panel,The empaneled judges for the case. Currently an unused field but planned to be used in conjunction with the panel_str field.
+0,originating-court-information,date_created,The time when this item was created
+1,originating-court-information,date_modified,The last moment when the item was modified.
+2,originating-court-information,docket_number,The docket number in the lower court.
+3,originating-court-information,assigned_to_str,"The judge that the case was assigned to, as a string."
+4,originating-court-information,ordering_judge_str,"The judge that issued the final order in the case, as a string."
+5,originating-court-information,court_reporter,The court reporter responsible for the case.
+6,originating-court-information,date_disposed,The date the case was disposed at the lower court.
+7,originating-court-information,date_filed,The date the case was filed in the lower court.
+8,originating-court-information,date_judgment,The date of the order or judgment in the lower court.
+9,originating-court-information,date_judgment_eod,The date the judgment was Entered On the Docket at the lower court.
+10,originating-court-information,date_filed_noa,The date the notice of appeal was filed for the case.
+11,originating-court-information,date_received_coa,The date the case was received at the court of appeals.
+12,originating-court-information,assigned_to,The judge the case was assigned to.
+13,originating-court-information,ordering_judge,The judge that issued the final order in the case.
+0,docket-entries,date_created,The time when this item was created.
+1,docket-entries,date_modified,The last moment when the item was modified.
+2,docket-entries,date_filed,The created date of the Docket Entry.
+3,docket-entries,entry_number,"# on the PACER docket page. For appellate cases, this may be the internal PACER ID for the document, when an entry ID is otherwise unavailable."
+4,docket-entries,recap_sequence_number,"A field used for ordering the docket entries on a docket. You might wonder, ""Why not use the docket entry numbers?"" That's a reasonable question, and prior to late 2018, this was the method we used. However, dockets often have ""unnumbered"" docket entries, and so knowing where to put those was only possible if you had another sequencing field, since they lacked an entry number. This field is populated by a combination of the date for the entry and a sequence number indicating the order that the unnumbered entries occur."
+5,docket-entries,pacer_sequence_number,"The de_seqno value pulled out of dockets, RSS feeds, and sundry other pages in PACER. The place to find this is currently in the onclick attribute of the links in PACER. Because we do not have this value for all items in the DB, we do not use this value for anything. Still, we collect it for good measure."
+6,docket-entries,description,The text content of the docket entry that appears in the PACER docket page.
+7,docket-entries,tags,The tags associated with the docket entry.
+0,recap-documents,date_created,The date the file was imported to Local Storage.
+1,recap-documents,date_modified,Timestamp of last update.
+2,recap-documents,sha1,The ID used for a document in RECAP
+3,recap-documents,page_count,"The number of pages in the document, if known"
+4,recap-documents,file_size,"The size of the file in bytes, if known"
+5,recap-documents,filepath_local,The path of the file in the local storage area.
+6,recap-documents,filepath_ia,The URL of the file in IA
+7,recap-documents,ia_upload_failure_count,Number of times the upload to the Internet Archive failed.
+8,recap-documents,thumbnail,A thumbnail of the first page of the document
+9,recap-documents,thumbnail_status,The status of the thumbnail generation
+10,recap-documents,plain_text,"Plain text of the document after extraction using pdftotext, wpd2txt, etc."
+11,recap-documents,ocr_status,The status of OCR processing on this item.
+12,recap-documents,date_upload,upload_date in RECAP. The date the file was uploaded to RECAP. This information is provided by RECAP.
+13,recap-documents,document_number,"If the file is a document, the number is the document_number in RECAP docket."
+14,recap-documents,attachment_number,"If the file is an attachment, the number is the attachment number in RECAP docket."
+15,recap-documents,pacer_doc_id,The ID of the document in PACER. This information is provided by RECAP.
+16,recap-documents,is_available,True if the item is available in RECAP
+17,recap-documents,is_free_on_pacer,Is this item freely available as an opinion on PACER?
+18,recap-documents,is_sealed,Is this item sealed or otherwise unavailable on PACER?
+19,recap-documents,document_type,Whether this is a regular document or an attachment.
+20,recap-documents,description,The short description of the docket entry that appears on the attachments page.
+0,courts,pacer_court_id,The numeric ID for the court in PACER. This can be found by looking at the first three digits of any doc1 URL in PACER.
+1,courts,pacer_has_rss_feed,"Whether the court has a PACER RSS feed. If null, this doesn't apply to the given court."
+2,courts,fjc_court_id,The ID used by FJC in the Integrated Database
+3,courts,date_modified,The last moment when the item was modified
+4,courts,in_use,Whether this jurisdiction is in use in CourtListener -- increasingly True
+5,courts,has_opinion_scraper,Whether the jurisdiction has a scraper that obtains opinions automatically.
+6,courts,has_oral_argument_scraper,Whether the jurisdiction has a scraper that obtains oral arguments automatically.
+7,courts,position,A dewey-decimal-style numeral indicating a hierarchical ordering of jurisdictions
+8,courts,citation_string,the citation abbreviation for the court as dictated by Blue Book
+9,courts,short_name,a short name of the court
+10,courts,full_name,the full name of the court
+11,courts,url,the homepage for each court or the closest thing thereto
+12,courts,start_date,"the date the court was established, if known"
+13,courts,end_date,"the date the court was abolished, if known"
+14,courts,jurisdiction,"the jurisdiction of the court, one of: F (Federal Appellate), FD (Federal District), FB (Federal Bankruptcy), FBP (Federal Bankruptcy Panel), FS (Federal Special), S (State Supreme), SA (State Appellate), ST (State Trial), SS (State Special), SAG (State Attorney General), C (Committee), I (International), T (Testing)"
+0,audio,source,"the source of the audio file, one of: C (court website), R (public.resource.org), CR (court website merged with resource.org), L (lawbox), LC (lawbox merged with court), LR (lawbox merged with resource.org), LCR (lawbox merged with court and resource.org), M (manual input), A (internet archive), H (brad heath archive), Z (columbia archive), ZC (columbia merged with court), ZLC (columbia merged with lawbox and court), ZLR (columbia merged with lawbox and resource.org), ZLCR (columbia merged with lawbox, court, and resource.org), ZR (columbia merged with resource.org), ZCR (columbia merged with court and resource.org), ZL (columbia merged with lawbox)"
+1,audio,case_name_short,"The abridged name of the case, often a single word, e.g. 'Marsh'"
+2,audio,case_name,The full name of the case
+3,audio,case_name_full,The full name of the case
+4,audio,judges,The judges that heard the oral arguments as a simple text string. This field is used when normalized judges cannot be placed into the panel field.
+5,audio,date_created,The original creation date for the item
+6,audio,date_modified,The last moment when the item was modified. A value in year 1750 indicates the value is unknown
+7,audio,sha1,"unique ID for the document, as generated via SHA1 of the binary file or text data"
+8,audio,download_url,The URL on the court website where the document was originally scraped
+9,audio,local_path_mp3,"The location, relative to MEDIA_ROOT, on the CourtListener server, where encoded file is stored"
+10,audio,local_path_original_file,"The location, relative to MEDIA_ROOT, on the CourtListener server, where the original file is stored"
+11,audio,filepath_ia,The URL of the file in IA
+12,audio,ia_upload_failure_count,Number of times the upload to the Internet Archive failed.
+13,audio,duration,"the length of the item, in seconds"
+14,audio,processing_complete,Is audio for this item done processing?
+15,audio,date_blocked,The date that this opinion was blocked from indexing by search engines
+16,audio,blocked,Should this item be blocked from indexing by search engines?
+17,audio,stt_status,The status of the Speech to Text for this item?
+18,audio,stt_google_response,The JSON response object returned by Google Speech.
+0,clusters,judges,The judges that participated in the opinion as a simple text string. This field is used when normalized judges cannot be placed into the panel field.
+1,clusters,date_created,The time when this item was created
+2,clusters,date_modified,The last moment when the item was modified. A value in year 1750 indicates the value is unknown
+3,clusters,date_filed,The date the cluster of opinions was filed by the court
+4,clusters,date_filed_is_approximate,"For a variety of opinions getting the correct date filed isvery difficult. For these, we have used heuristics to approximate the date."
+5,clusters,slug,URL that the document should map to (the slug)
+6,clusters,case_name_short,"The abridged name of the case, often a single word, e.g. 'Marsh'"
+7,clusters,case_name,The shortened name of the case
+8,clusters,case_name_full,The full name of the case
+9,clusters,federal_cite_one,Primary federal citation
+10,clusters,federal_cite_two,Secondary federal citation
+11,clusters,federal_cite_three,Tertiary federal citation
+12,clusters,state_cite_one,Primary state citation
+13,clusters,state_cite_two,Secondary state citation
+14,clusters,state_cite_three,Tertiary state citation
+15,clusters,state_cite_regional,Regional citation
+16,clusters,specialty_cite_one,Specialty citation
+17,clusters,scotus_early_cite,"Early SCOTUS citation such as How., Black, Cranch., etc."
+18,clusters,lexis_cite,LexisNexis citation (e.g. 1 LEXIS 38237)
+19,clusters,westlaw_cite,WestLaw citation (e.g. 22 WL 238)
+20,clusters,neutral_cite,Neutral citation
+21,clusters,scdb_id,The ID of the item in the Supreme Court Database
+22,clusters,scdb_decision_direction,"the ideological ""direction"" of a decision in the Supreme Court database. More details at: http://scdb.wustl.edu/documentation.php?var=decisionDirection"
+23,clusters,scdb_votes_majority,the number of justices voting in the majority in a Supreme Court decision. More details at: http://scdb.wustl.edu/documentation.php?var=majVotes
+24,clusters,scdb_votes_minority,the number of justices voting in the minority in a Supreme Court decision. More details at: http://scdb.wustl.edu/documentation.php?var=minVotes
+25,clusters,source,"the source of the cluster, one of: C (court website), R (public.resource.org), CR (court website merged with resource.org), L (lawbox), LC (lawbox merged with court), LR (lawbox merged with resource.org), LCR (lawbox merged with court and resource.org), M (manual input), A (internet archive), H (brad heath archive), Z (columbia archive), ZC (columbia merged with court), ZLC (columbia merged with lawbox and court), ZLR (columbia merged with lawbox and resource.org), ZLCR (columbia merged with lawbox, court, and resource.org), ZR (columbia merged with resource.org), ZCR (columbia merged with court and resource.org), ZL (columbia merged with lawbox)"
+26,clusters,procedural_history,The history of the case as it jumped from court to court
+27,clusters,attorneys,"The attorneys that argued the case, as free text"
+28,clusters,nature_of_suit,The nature of the suit. For the moment can be codes or laws or whatever
+29,clusters,posture,The procedural posture of the case.
+30,clusters,syllabus,A summary of the issues presented in the case and the outcome.
+31,clusters,citation_count,The number of times this document is cited by other opinion
+32,clusters,precedential_status,"The precedential status of document, one of: Published, Unpublished, Errata, Separate, In-chambers, Relating-to, Unknown"
+33,clusters,date_blocked,The date that this opinion was blocked from indexing by search engines
+34,clusters,blocked,Whether a document should be blocked from indexing by search engines
+0,opinions,author_str,"The primary author of this opinion, as a simple text string. This field is used when normalized judges cannot be placed into the author field."
+1,opinions,per_curiam,"Is this opinion per curiam, without a single author?"
+2,opinions,date_created,The original creation date for the item
+3,opinions,date_modified,The last moment when the item was modified. A value in year 1750 indicates the value is unknown
+4,opinions,sha1,"unique ID for the document, as generated via SHA1 of the binary file or text data"
+5,opinions,page_count,"The number of pages in the document, if known"
+6,opinions,download_url,The URL where the item was originally scraped. Note that these URLs may often be dead due to the court or the bulk provider changing their website. We keep the original link here given that it often contains valuable metadata.
+7,opinions,local_path,"The location, relative to MEDIA_ROOT on the CourtListener server, where files are stored"
+8,opinions,plain_text,"Plain text of the document after extraction using pdftotext, wpd2txt, etc."
+9,opinions,html,"HTML of the document, if available in the original"
+10,opinions,html_lawbox,HTML of Lawbox documents
+11,opinions,html_columbia,HTML of Columbia archive
+12,opinions,html_with_citations,HTML of the document with citation links and other post-processed markup added
+13,opinions,extracted_by_ocr,Whether OCR was used to get this document content
+14,opinions,opinions_cited,Opinions cited by this opinion
+0,tag,date_created,The original creation date for the item
+1,tag,date_modified,The last moment when the item was modified. A value in year 1750 indicates the value is unknown
+2,tag,name,The name of the tag.
+0,people,date_created,The original creation date for the item
+1,people,date_modified,The last moment when the item was modified.
+2,people,fjc_id,The ID of a judge as assigned by the Federal Judicial Center.
+3,people,cl_id,"A unique identifier for judge, also indicating source of data."
+4,people,slug,A generated path for this item as used in CourtListener URLs
+5,people,name_first,The first name of this person.
+6,people,name_middle,The middle name or names of this person
+7,people,name_last,The last name of this person
+8,people,name_suffix,Any suffixes that this person's name may have
+9,people,date_dob,The date of birth for the person
+10,people,date_dod,The date of death for the person
+11,people,dob_city,The city where the person was born.
+12,people,dob_state,The state where the person was born.
+13,people,dod_city,The city where the person died.
+14,people,dod_state,The state where the person died.
+15,people,gender,The person's gender
+16,people,religion,The religion of a person
+17,people,ftm_total_received,The amount of money received by this person and logged by Follow the Money.
+18,people,ftm_eid,The ID of a judge as assigned by the Follow the Money database.
+19,people,has_photo,Whether there is a photo corresponding to this person in the judge pics project.
+0,positions,position_type,"If this is a judicial position, this indicates the role the person had. This field may be blank if job_title is complete instead."
+1,positions,job_title,"If title isn't in position_type, a free-text position may be entered here."
+2,positions,organization_name,"If the organization where this position was held is not a school or court, this is the place it was held."
+3,positions,location_city,"If not a court or school, the city where person worked."
+4,positions,location_state,"If not a court or school, the state where person worked."
+5,positions,date_created,The time when this item was created
+6,positions,date_modified,The last moment when the item was modified.
+7,positions,date_nominated,"The date recorded in the Senate Executive Journal when a federal judge was nominated for their position or the date a state judge nominated by the legislature. When a nomination is by primary election, this is the date of the election. When a nomination is from a merit commission, this is the date the nomination was announced."
+8,positions,date_elected,Judges are elected in most states. This is the date of theirfirst election. This field will be null if the judge was initially selected by nomination.
+9,positions,date_recess_appointment,"If a judge was appointed while congress was in recess, this is the date of that appointment."
+10,positions,date_referred_to_judicial_committee,Federal judges are usually referred to the Judicial Committee before being nominated. This is the date of that referral.
+11,positions,date_judicial_committee_action,The date that the Judicial Committee took action on the referral.
+12,positions,judicial_committee_action,The action that the judicial committee took in response to a nomination
+13,positions,date_hearing,"After being nominated, a judge is usually subject to a hearing. This is the date of that hearing."
+14,positions,date_confirmation,After the hearing the senate will vote on judges. This is the date of that vote.
+15,positions,date_start,The date the position starts active duty.
+16,positions,date_termination,The last date of their employment. The compliment to date_start
+17,positions,termination_reason,The reason for a termination
+18,positions,date_retirement,The date when they become a senior judge by going into active retirement
+19,positions,nomination_process,The process by which a person was nominated into this position.
+20,positions,vote_type,The type of vote that resulted in this position.
+21,positions,voice_vote,Whether the Senate voted by voice vote for this position.
+22,positions,votes_yes,"If votes are an integer, this is the number of votes in favor of a position."
+23,positions,votes_no,"If votes are an integer, this is the number of votes opposed to a position."
+24,positions,votes_yes_percent,"If votes are a percentage, this is the percentage of votes in favor of a position."
+25,positions,votes_no_percent,"If votes are a percentage, this is the percentage of votes opposed to a position."
+26,positions,how_selected,The method that was used for selecting this judge for this position (generally an election or appointment).
+27,positions,has_inferred_values,Some or all of the values for this position were inferred from a data source instead of manually added. See sources field for more details.
+0,retention-events,date_created,The original creation date for the item
+1,retention-events,date_modified,The last moment when the item was modified.
+2,retention-events,retention_type,The method through which this position was retained.
+3,retention-events,date_retention,The date of retention
+4,retention-events,votes_yes,"If votes are an integer, this is the number of votes in favor of a position."
+5,retention-events,votes_no,"If votes are an integer, this is the number of votes opposed to a position."
+6,retention-events,votes_yes_percent,"If votes are a percentage, this is the percentage of votes in favor of a position."
+7,retention-events,votes_no_percent,"If votes are a percentage, this is the percentage of votes opposed to a position."
+8,retention-events,unopposed,Whether the position was unopposed at the time of retention.
+9,retention-events,won,Whether the retention event was won.
+0,educations,date_created,The original creation date for the item
+1,educations,date_modified,The last moment when the item was modified.
+2,educations,degree_level,"Normalized degree level, e.g. BA, JD."
+3,educations,degree_detail,"Detailed degree description, e.g. including major."
+4,educations,degree_year,The year the degree was awarded.
+0,schools,date_created,The original creation date for the item
+1,schools,date_modified,The last moment when the item was modified
+2,schools,name,The name of the school or alias
+3,schools,ein,The EIN assigned by the IRS
+0,political-affiliations,date_created,The original creation date for the item
+1,political-affiliations,date_modified,The last moment when the item was modified.
+2,political-affiliations,political_party,The political party the person is affiliated with.
+3,political-affiliations,source,The source of the political affiliation -- where it is documented that this affiliation exists.
+4,political-affiliations,date_start,The date the political affiliation was first documented
+5,political-affiliations,date_end,The date the affiliation ended.
+0,sources,date_created,The original creation date for the item
+1,sources,date_modified,The last moment when the item was modified
+2,sources,url,The URL where this data was gathered.
+3,sources,date_accessed,The date the data was gathered.
+4,sources,notes,"Any additional notes about the data's provenance, in Markdown format."
+0,aba-ratings,date_created,The original creation date for the item
+1,aba-ratings,date_modified,The last moment when the item was modified.
+2,aba-ratings,year_rated,The year of the rating.
+3,aba-ratings,rating,The rating given to the person.
+0,parties,date_created,The time when this item was created
+1,parties,date_modified,The last moment when the item was modified.
+2,parties,name,The name of the party.
+3,parties,extra_info,Additional info from PACER
+0,attorneys,date_created,The time when this item was created
+1,attorneys,date_modified,The last moment when the item was modified.
+2,attorneys,name,The name of the attorney.
+3,attorneys,contact_raw,The raw contents of the contact field
+4,attorneys,phone,The phone number of the attorney.
+5,attorneys,fax,The fax number of the attorney.
+6,attorneys,email,The email address of the attorney.
+0,recap-fetch,date_created,The time when this item was created
+1,recap-fetch,date_modified,The last moment when the item was modified.
+2,recap-fetch,date_completed,When the item was completed or errored out.
+3,recap-fetch,status,"The current status of this request. Possible values are: (1): Awaiting processing in queue., (2): Item processed successfully., (3): Item encountered an error while processing., (4): Item is currently being processed., (5): Item failed processing, but will be retried., (6): Item failed validity tests."
+4,recap-fetch,request_type,The type of object that is requested
+5,recap-fetch,message,Any messages that may help a user during or after processing.
+6,recap-fetch,pacer_case_id,The case ID provided by PACER for the case to update (must be used in combination with the court field).
+7,recap-fetch,docket_number,The docket number of a case to update (must be used in combination with the court field).
+8,recap-fetch,de_date_start,Only fetch docket entries (de) newer than this date. Default is 1 Jan. 1960. Timezone appears to be that of the court.
+9,recap-fetch,de_date_end,Only fetch docket entries (de) older than or equal to this date. Timezone appears to be that of the court.
+10,recap-fetch,de_number_start,Only fetch docket entries (de) >= than this value. Warning: Using this parameter will not return numberless entries.
+11,recap-fetch,de_number_end,Only fetch docket entries (de) <= this value. Warning: Using this parameter will not return numberless entries.
+12,recap-fetch,show_parties_and_counsel,Should we pull parties and counsel for a docket report?
+13,recap-fetch,show_terminated_parties,Should we pull terminated parties and counsel as well?
+14,recap-fetch,show_list_of_member_cases,Should we pull the list of member cases? This can add considerable expense to each docket.
+0,recap-query,pacer_doc_id,The ID of the document in PACER. This information is provided by RECAP.
+1,recap-query,filepath_local,The path of the file in the local storage area.
+0,fjc-integrated-database,dataset_source,IDB has several source datafiles. This field helps keep track of where a row came from originally.
+1,fjc-integrated-database,date_created,The time when this item was created
+2,fjc-integrated-database,date_modified,The last moment when the item was modified.
+3,fjc-integrated-database,office,"The code that designates the office within the district where the case is filed. Must conform with format established in Volume XI, Guide to Judiciary Policies and Procedures, Appendix A. See: https://free.law/idb-facts/"
+4,fjc-integrated-database,docket_number,The number assigned by the Clerks' office; consists of 2 digit Docket Year (usually calendar year in which the case was filed) and 5 digit sequence number.
+5,fjc-integrated-database,origin,A single digit code describing the manner in which the case was filed in the district.
+6,fjc-integrated-database,date_filed,The date on which the case was filed in the district.
+7,fjc-integrated-database,jurisdiction,The code which provides the basis for the U.S. district court jurisdiction in the case. This code is used in conjunction with appropriate nature of suit code.
+8,fjc-integrated-database,nature_of_suit,A three digit statistical code representing the nature of suit of the action filed.
+9,fjc-integrated-database,title,No description provided by FJC.
+10,fjc-integrated-database,section,No description provided by FJC.
+11,fjc-integrated-database,subsection,No description provided by FJC.
+12,fjc-integrated-database,diversity_of_residence,"Involves diversity of citizenship for the plaintiff and defendant. First position is the citizenship of the plaintiff, second position is the citizenship of the defendant. Only used when jurisdiction is 4"
+13,fjc-integrated-database,class_action,"Involves an allegation by the plaintiff that the complaint meets the prerequisites of a ""Class Action"" as provided in Rule 23 - F.R.CV.P. "
+14,fjc-integrated-database,monetary_demand,"The monetary amount sought by plaintiff (in thousands). Amounts less than $500 appear as 1, and amounts over $10k appear as 9999. See notes in codebook."
+15,fjc-integrated-database,county_of_residence,The code for the county of residence of the first listed plaintiff (see notes in codebook). Appears to use FIPS code.
+16,fjc-integrated-database,arbitration_at_filing,This field is used only by the courts  participating in the Formal Arbitration Program.  It is not used for any other purpose.
+17,fjc-integrated-database,arbitration_at_termination,Termination arbitration code.
+18,fjc-integrated-database,multidistrict_litigation_docket_number,A 4 digit multi district litigation docket number.
+19,fjc-integrated-database,plaintiff,First listed plaintiff. This field appears to be cut off at 30 characters
+20,fjc-integrated-database,defendant,First listed defendant. This field appears to be cut off at 30 characters.
+21,fjc-integrated-database,date_transfer,The date when the papers were received in the receiving district for a transferred  case.
+22,fjc-integrated-database,transfer_office,The office number of the district losing the case.
+23,fjc-integrated-database,transfer_docket_number,The docket number of the case in the losing district
+24,fjc-integrated-database,transfer_origin,The origin number of the case in the losing district
+25,fjc-integrated-database,date_terminated,The date the district court received the final judgment or the order disposing of the case.
+26,fjc-integrated-database,termination_class_action_status,A code that indicates a case involving allegations of class action.
+27,fjc-integrated-database,procedural_progress,The point to which the case had progressed when it was disposed of. See notes in codebook.
+28,fjc-integrated-database,disposition,The manner in which the case was disposed of.
+29,fjc-integrated-database,nature_of_judgement,Cases disposed of by an entry of a final judgment.
+30,fjc-integrated-database,amount_received,Dollar amount received (in thousands) when appropriate. Field not used uniformally; see codebook.
+31,fjc-integrated-database,judgment,Which party the cases was disposed in favor of.
+32,fjc-integrated-database,pro_se,Which parties filed pro se? (See codebook for more details.)
+33,fjc-integrated-database,year_of_tape,Statistical year label on data files obtained from the Administrative Office of the United States Courts.  2099 on pending case records.
+34,fjc-integrated-database,nature_of_offense,The four digit D2 offense code associated with the filing title/secion 1. These codes were created in FY2005 to replace the AO offense codes.
+35,fjc-integrated-database,version,This field was created in FY 2012. It increments with each update received to a defendant record.
+36,fjc-integrated-database,circuit,Circuit in which the case was filed.
+37,fjc-integrated-database,district,District court in which the case was filed.
