@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+#config folders password files
+**/config
+*.ini
+
+#logs
+*.log
+
+#
+.DS_Store
+
+#R
+.Rhistory
