@@ -39,3 +39,6 @@ cur = conn.cursor()
 cur.execute(check)
 for record in cur:
     print (record)
+
+conn.close()
+print("connection closed")
