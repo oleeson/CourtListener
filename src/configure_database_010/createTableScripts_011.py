@@ -7,6 +7,7 @@ import os
 #get endpoints
 endpoints = requests.get("https://www.courtlistener.com/api/rest/v3/")
 endpoints = endpoints.json()
+del endpoints["recap"]
 
 TOKEN = cf.tokenOut()
 
@@ -21,6 +22,7 @@ timeStampFields = ['datetime']
 
 for key, value in endpoints.items():
     tablename = key
+    tablename = tablename.replace("-", "_")
     url = value
     options = requests.options(url, headers={'Authorization': TOKEN})
     fieldList = ["CREATE TABLE",tablename,"("]
