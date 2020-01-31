@@ -1,8 +1,10 @@
 from configparser import ConfigParser
 from getpass import getpass
 import os
+import psycopg2
 
-## Get parameters for database connection from .ini file
+#Function to get Database Credentials
+#Returns dictionary containing credentials
 def config(pathToFile, dbName):
     parser = ConfigParser()
 
@@ -23,6 +25,30 @@ def config(pathToFile, dbName):
 
     return dbDict
 
+#Function to connect to database
+def connect(filename = "database.ini", dbName="courtlistener"):
+    owd = os.getcwd()
+    try:
+        os.chdir("../../config/")
+        path = os.getcwd() + "/" + filename
+        print("Path to file: ", path)
+        print("dbName: ", dbName)
+        os.chdir(owd)
+    except:
+        path = input("input path to db configuration file: ")
+
+    conf = config(path, dbName)
+
+    conn = psycopg2.connect(**conf)
+    cur = conn.cursor()
+    cur.execute('SELECT version()')
+    version = cur.fetchone()
+
+    return conn
+    print(version)
+
+
+#Function to get API Token
 def tokenOut(passwordFile = 'passwords.ini', section='olivia', passwordTo='api'):
     owd = os.getcwd()
     try:

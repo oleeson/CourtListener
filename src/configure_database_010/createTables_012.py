@@ -1,5 +1,5 @@
 import json
-import configFunction as cf
+import configFunctions as cf
 import psycopg2
 import os
 
@@ -15,26 +15,12 @@ masterScript = sep.join(masterList)
 masterScript = masterScript.replace(" user ", ' "user" ')
 
 #connect to database
-filename = 'database.ini'
-dbName = 'courtlistener'
-owd = os.getcwd()
-
-try:
-    os.chdir("../../config/")
-    path = os.getcwd() + "/" + filename
-    print("Path to file: ", path)
-    print("dbName: ", dbName)
-    os.chdir(owd)
-except:
-    path = input("input path to db configuration file: ")
-
-config = cf.config(path, dbName)
-conn = psycopg2.connect(**config)
+conn = cf.connect()
 cur = conn.cursor()
 cur.execute(masterScript)
 
 #check it worked
-check = " SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';"
+check = " SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'public';"
 cur = conn.cursor()
 cur.execute(check)
 for record in cur:

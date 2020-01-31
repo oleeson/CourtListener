@@ -1,6 +1,6 @@
 #import libraries
 import requests
-import configFunction as cf
+import configFunctions as cf
 import json
 import os
 

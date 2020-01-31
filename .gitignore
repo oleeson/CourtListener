@@ -1,6 +1,9 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+#ipython checkpoints
+*.ipynb_checkpoints/
+
 #config folders password files
 **/config
 *.ini
